@@ -7,7 +7,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // URL de conexión a tu cluster MongoDB Atlas
-const mongoURI = "mongodb+srv://joaquin:Arg2030@portfolio.yzvtwug.mongodb.net/portfolio?retryWrites=true&w=majority";
+// const mongoURI = "mongodb+srv://joaquin:Arg2030@portfolio.yzvtwug.mongodb.net/portfolio?retryWrites=true&w=majority";
+const mongoURI = process.env.MONGODB_URI;
 
 // Conexión a MongoDB
 mongoose.connect(mongoURI, {
