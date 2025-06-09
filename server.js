@@ -2,17 +2,16 @@ const express = require("express");
 const mongoose = require("mongoose");
 const Project = require("./models/Project");
 const path = require("path");
-require("dotenv").config(); // 👈 AÑADIDO
+require("dotenv").config();
 const cors = require("cors");
-app.use(cors({ origin: "https://www.joaquinarretche.com" }));
 
-const app = express();
+const app = express(); // ✅ primero definís app
+app.use(cors({ origin: "https://www.joaquinarretche.com" })); // ✅ luego usás cors
+
 const PORT = process.env.PORT || 3000;
 
-// 👇 URL de conexión desde variable de entorno (ya lo hiciste bien)
 const mongoURI = process.env.MONGODB_URI;
 
-// Conexión a MongoDB
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -20,10 +19,8 @@ mongoose.connect(mongoURI, {
 .then(() => console.log("🟢 Conectado a MongoDB Atlas"))
 .catch(err => console.error("🔴 Error conectando a MongoDB:", err));
 
-// Servir archivos estáticos
 app.use(express.static(path.join(__dirname, "public")));
 
-// API endpoints (todos perfectos)
 app.get("/api/projects", async (req, res) => {
   try {
     const projects = await Project.find({});
