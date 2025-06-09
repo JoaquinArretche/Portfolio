@@ -1,4 +1,4 @@
-const API_BASE = "https://portfolio-backend-cj5g.onrender.com";
+
 
 // Cargar info personal
 fetch(`${API_BASE}/api/info`)
