@@ -234,7 +234,7 @@ function openProjectFromData(project, allProjects = [], direction = "next") {
 }
 
 // CARGAR PROYECTOS
-fetch("/api/projects")
+fetch("https://portfolio-backend-cj5g.onrender.com/api/projects")
   .then(res => res.json())
   .then(projects => {
     const container = document.getElementById("projectCardMenuContainer");

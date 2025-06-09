@@ -2,7 +2,7 @@
 // Variables Globales
 // ========================
 let allProjectsData = [];
-
+const API_BASE = "https://portfolio-backend-cj5g.onrender.com";
 
 // ========================
 // Loader inicial
@@ -15,14 +15,13 @@ window.addEventListener("load", () => {
   }
 });
 
-
 // ========================
 // Carga de proyectos en Home
 // ========================
-fetch("/api/projects")
+fetch(`${API_BASE}/api/projects`)
   .then(res => res.json())
   .then(projects => {
-    allProjectsData = projects; // Guardamos los proyectos para reutilizar
+    allProjectsData = projects;
 
     const container = document.getElementById("projectCardsContainer");
     if (!container) {
@@ -39,7 +38,7 @@ fetch("/api/projects")
       const mediaHTML = project.gallery
         .slice(0, 3)
         .map((item, i) => {
-          const className = `img-${String.fromCharCode(97 + i)}`; // img-a, img-b, img-c
+          const className = `img-${String.fromCharCode(97 + i)}`;
           const isVideo = item.match(/\.(mp4|webm|ogg)(\?|$)/i);
           return isVideo
             ? `<div class="${className}"><video src="${item}" autoplay muted loop playsinline></video></div>`
@@ -57,7 +56,6 @@ fetch("/api/projects")
         <div class="img-grid">${mediaHTML}</div>
       `;
 
-      // ✅ Importante: pasamos todos los proyectos
       card.addEventListener("click", () => {
         openProjectFromData(project, allProjectsData);
       });
@@ -65,12 +63,11 @@ fetch("/api/projects")
       container.appendChild(card);
     });
 
-    lucide.createIcons(); // Carga los íconos de Lucide
+    lucide.createIcons();
   })
   .catch(err => {
     console.error("Error al cargar proyectos:", err);
   });
-
 
 // ========================
 // Sincronización de scroll entre .content y .projects
@@ -115,7 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
 
 // ========================
 // Botón de scroll a proyectos

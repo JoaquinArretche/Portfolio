@@ -1,4 +1,7 @@
-fetch("/api/info")
+const API_BASE = "https://portfolio-backend-cj5g.onrender.com";
+
+// Cargar info personal
+fetch(`${API_BASE}/api/info`)
   .then((res) => res.json())
   .then((data) => {
     const container = document.getElementById("personalContentContainer");
@@ -10,12 +13,10 @@ fetch("/api/info")
       </div>
 
       <div class="contact">
-  <div>
-  <h4>Contact</h4>
-  <p><a href="mailto:${data.contact.email}" class="mail">${
-      data.contact.email
-    }</a></p>
-</div>
+        <div>
+          <h4>Contact</h4>
+          <p><a href="mailto:${data.contact.email}" class="mail">${data.contact.email}</a></p>
+        </div>
 
         <div>
           <h4>Location</h4>
@@ -32,15 +33,15 @@ fetch("/api/info")
           ${data.contact.links
             .map(
               (link) => `
-            <div>
-              <a href="${link.href}" target="_blank">
-                ${link.label}
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M6 18L18 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M6 6H18V18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </a>
-            </div>`
+              <div>
+                <a href="${link.href}" target="_blank">
+                  ${link.label}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 18L18 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M6 6H18V18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </a>
+              </div>`
             )
             .join("")}
         </div>
@@ -49,7 +50,8 @@ fetch("/api/info")
   })
   .catch((err) => console.error("Error al cargar info:", err));
 
-fetch("/api/info-panel")
+// Cargar info panel
+fetch(`${API_BASE}/api/info-panel`)
   .then((res) => res.json())
   .then((data) => {
     const infoPanelContent = document.getElementById("infoPanelContent");
@@ -58,19 +60,19 @@ fetch("/api/info-panel")
     infoPanelContent.innerHTML = `
       <h2>Info</h2>
       <div class="infoFlex">
-      <img src="${data.image}" alt="infoPic" class="infoPic">
+        <img src="${data.image}" alt="infoPic" class="infoPic">
 
-      <div>
-            <p class="infop"><span>Biography</span>${data.biography}</p>
-            <p class="infop"><span>Skills</span>${data.skills}</p>
-            <p class="infop"><span>Vision</span>${data.vision}</p>
-            <p>${data.openTo}</p>
-      
-            <p><span>Awards & Talks</span></p>
-            <ul>
-              ${data.awards
-                .map(
-                  (award) => `
+        <div>
+          <p class="infop"><span>Biography</span>${data.biography}</p>
+          <p class="infop"><span>Skills</span>${data.skills}</p>
+          <p class="infop"><span>Vision</span>${data.vision}</p>
+          <p>${data.openTo}</p>
+
+          <p><span>Awards & Talks</span></p>
+          <ul>
+            ${data.awards
+              .map(
+                (award) => `
                 <a href="${award.link}" target="_blank">
                   <li>${award.label}
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -79,10 +81,10 @@ fetch("/api/info-panel")
                     </svg>
                   </li>
                 </a>`
-                )
-                .join("")}
-            </ul>
-      </div>
+              )
+              .join("")}
+          </ul>
+        </div>
       </div>
 
       <div class="end">
