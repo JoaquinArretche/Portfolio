@@ -62,6 +62,12 @@ app.get("/api/info-panel", async (req, res) => {
   }
 });
 
+// Endpoint para mantener activo el backend (usado por frontend y UptimeRobot)
+app.get("/ping", (req, res) => {
+  res.status(200).json({ status: "ok", timestamp: Date.now() });
+});
+
+
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
 });
