@@ -10,12 +10,24 @@ const API_BASE = "https://portfolio-backend-cj5g.onrender.com";
 window.addEventListener('load', () => {
   const loader = document.querySelector('.loader-container');
   if (loader) {
-    // Add a small delay to ensure smooth transition
     setTimeout(() => {
       loader.classList.add('hidden');
     }, 500);
   }
 });
+
+// ========================
+// Mantener backend activo (ping inicial y periódico)
+// ========================
+function pingBackend() {
+  fetch(`${API_BASE}/ping`)
+    .then(res => console.log("✅ Backend activado con ping"))
+    .catch(err => console.error("❌ Error al hacer ping:", err));
+}
+
+pingBackend(); // Ping al cargar
+
+setInterval(pingBackend, 10 * 60 * 1000); // Ping cada 10 minutos
 
 // ========================
 // Carga de proyectos en Home
@@ -83,9 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
       rightPanel.scrollTop = leftPanel.scrollTop;
     });
   }
-});
 
-document.addEventListener("DOMContentLoaded", () => {
   const content = document.querySelector(".hero .content");
   const projects = document.querySelector(".hero .projects");
 
