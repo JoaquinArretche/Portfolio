@@ -7,11 +7,13 @@ const API_BASE = "https://portfolio-backend-cj5g.onrender.com";
 // ========================
 // Loader inicial
 // ========================
-window.addEventListener("load", () => {
-  const loader = document.getElementById("loader");
+window.addEventListener('load', () => {
+  const loader = document.querySelector('.loader-container');
   if (loader) {
-    loader.style.opacity = 0;
-    setTimeout(() => loader.remove(), 600);
+    // Add a small delay to ensure smooth transition
+    setTimeout(() => {
+      loader.classList.add('hidden');
+    }, 500);
   }
 });
 
