@@ -67,6 +67,11 @@ app.get("/ping", (req, res) => {
   res.status(200).json({ status: "ok", timestamp: Date.now() });
 });
 
+// new HEAD /ping route (for UptimeRobot)
+app.head("/ping", (req, res) => {
+  res.sendStatus(200);
+});
+
 
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
